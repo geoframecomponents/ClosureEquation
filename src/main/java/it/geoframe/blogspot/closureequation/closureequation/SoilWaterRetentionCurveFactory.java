@@ -1,7 +1,7 @@
 /*
  * GNU GPL v3 License
  *
- * Copyright 2019 Niccolo` Tubini
+ * Copyright 2019 Niccolo Tubini
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -20,7 +20,7 @@
 package it.geoframe.blogspot.closureequation.closureequation;
 
 /**
- * @author Niccolo` Tubini
+ * @author Niccolo Tubini
  *
  */
 

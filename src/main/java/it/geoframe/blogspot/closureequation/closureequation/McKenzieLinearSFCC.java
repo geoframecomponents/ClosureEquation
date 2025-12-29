@@ -1,7 +1,7 @@
 /*
  * GNU GPL v3 License
  *
- * Copyright 2019 Niccolo` Tubini
+ * Copyright 2019 Niccolo Tubini
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -24,10 +24,10 @@
 package it.geoframe.blogspot.closureequation.closureequation;
 
 /**
- * @author Niccolo` Tubini
+ * @author Niccolo Tubini
  * 
  * McKenzie, Jeffrey M., Clifford I. Voss, and Donald I. Siegel. 
- * "Groundwater flow with energy transport and water–ice phase change: numerical simulations, benchmarks, 
+ * "Groundwater flow with energy transport and waterice phase change: numerical simulations, benchmarks, 
  * and application to freezing in peat bogs." 
  * Advances in water resources 30.4 (2007): 966-983.
  * https://doi.org/10.1016/j.advwatres.2006.08.008
