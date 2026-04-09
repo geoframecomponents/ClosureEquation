@@ -29,7 +29,7 @@
 
 	<properties>
 		<!-- this library version number -->
-		<revision>1.9.1</revision>
+		<revision>1.9.1-SNAPSHOT</revision>
 		<!-- variable -->
 		<hm.version>0.10.11</hm.version>
 		<gt.version>34.0</gt.version>
