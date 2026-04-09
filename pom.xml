@@ -187,7 +187,7 @@
 					<archive>
 						<manifestEntries>
 							<Automatic-Module-Name>
-								org.geoframecomponents.rainsnowsep</Automatic-Module-Name>
+								org.geoframe.closureequation</Automatic-Module-Name>
 						</manifestEntries>
 					</archive>
 				</configuration>
