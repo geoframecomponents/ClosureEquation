@@ -23,33 +23,36 @@
 package org.geoframe.closureequation.conductivitymodel;
 
 import org.geoframe.closureequation.closureequation.ClosureEquation;
-import org.geoframe.closureequation.conductivitymodel.ConductivityEquation;
 
 /**
  * @author Niccolo Tubini
  *
  */
-public class SoilThermalConductivityCosenza2 extends ConductivityEquation{
-	
+public class SoilThermalConductivityCosenza2 extends ConductivityEquation {
+
 	public SoilThermalConductivityCosenza2(ClosureEquation closureEquation) {
 		super(closureEquation);
 		// TODO Auto-generated constructor stub
 	}
 
 	private double thermalConductivityAir = 0.023;
-	
+
 	public double k(double x, int id, int element) {
 
 		return -9999.0;
 	}
 
-
 	@Override
 	public double k(double x, double y, int id, int element) {
 		// TODO Auto-generated method stub
-		return Math.pow( (1-super.closureEquation.parameters.thetaS[id])*Math.sqrt(super.closureEquation.parameters.thermalConductivitySoilParticles[id]) + super.closureEquation.f(y, x, id)*Math.sqrt(super.closureEquation.parameters.thermalConductivityWater) + (super.closureEquation.parameters.thetaS[id]-super.closureEquation.f(y, x, id))*Math.sqrt(thermalConductivityAir), 2);
+		return Math.pow((1 - super.closureEquation.getParameters().thetaS[id])
+				* Math.sqrt(super.closureEquation.getParameters().thermalConductivitySoilParticles[id])
+				+ super.closureEquation.f(y, x, id)
+						* Math.sqrt(super.closureEquation.getParameters().thermalConductivityWater)
+				+ (super.closureEquation.getParameters().thetaS[id] - super.closureEquation.f(y, x, id))
+						* Math.sqrt(thermalConductivityAir),
+				2);
 
 	}
-	
-	
+
 }

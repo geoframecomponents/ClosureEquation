@@ -29,34 +29,34 @@ import org.geoframe.closureequation.conductivitymodel.ConductivityEquation;
  * @author Niccolo Tubini
  *
  */
-public class MualemVanGenuchten extends ConductivityEquation{
-	
+public class MualemVanGenuchten extends ConductivityEquation {
+
 	private double m = -999.0;
 	private double saturationDegree = -999.0;
-	
+
 	public MualemVanGenuchten(ClosureEquation closureEquation) {
 		super(closureEquation);
 		// TODO Auto-generated constructor stub
 	}
-	
-	
+
 	public double k(double x, double y, int id, int element) {
-			
-		this.m = 1-1/super.closureEquation.parameters.par1[id];
-		saturationDegree = (super.closureEquation.f(x, y, id) - super.closureEquation.parameters.thetaR[id])/(super.closureEquation.parameters.thetaS[id] - super.closureEquation.parameters.thetaR[id]); 
-		if(saturationDegree<1) {
-			return super.closureEquation.parameters.kappaSaturation[id] * Math.pow(saturationDegree, 0.5 ) * Math.pow(1.0 - Math.pow(1.0 - Math.pow(saturationDegree, 1.0/m), m), 2.0);
+
+		this.m = 1 - 1 / super.closureEquation.getParameters().par1[id];
+		saturationDegree = (super.closureEquation.f(x, y, id) - super.closureEquation.getParameters().thetaR[id])
+				/ (super.closureEquation.getParameters().thetaS[id] - super.closureEquation.getParameters().thetaR[id]);
+		if (saturationDegree < 1) {
+			return super.closureEquation.getParameters().kappaSaturation[id] * Math.pow(saturationDegree, 0.5)
+					* Math.pow(1.0 - Math.pow(1.0 - Math.pow(saturationDegree, 1.0 / m), m), 2.0);
 		} else {
-			return super.closureEquation.parameters.kappaSaturation[id];
+			return super.closureEquation.getParameters().kappaSaturation[id];
 		}
-		
-	
+
 	}
-	
+
 	public double k(double x, int id, int element) {
-		
+
 		return -9999.0;
-	
+
 	}
-	
+
 }

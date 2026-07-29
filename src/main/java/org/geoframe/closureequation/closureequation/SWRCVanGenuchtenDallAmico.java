@@ -17,136 +17,142 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-
 /**
  * 
  */
 package org.geoframe.closureequation.closureequation;
 
-
-
 /**
  * @author Niccolo Tubini
  *
- * Van Genuchten SWRC
+ *         Van Genuchten SWRC
  */
 public class SWRCVanGenuchtenDallAmico extends SoilWaterRetentionCurve {
+
+	public SWRCVanGenuchtenDallAmico(Parameters parameters) {
+		super(parameters);
+		// TODO Auto-generated constructor stub
+	}
 
 	private double m;
 	private double meltingTemperature;
 	private double tmp;
 	private double psiT;
-	
-	
+
 	@Override
 	public double f(double x, double y, int id) {
 
-		m = 1-1/super.parameters.par1[id];
-		meltingTemperature = 273.15 + 9.81*273.15/super.parameters.latentHeatFusion*x;
-		if(y>meltingTemperature) {
-			if(x>=0) {
-				return super.parameters.thetaS[id];
+		m = 1 - 1 / super.getParameters().par1[id];
+		meltingTemperature = 273.15 + 9.81 * 273.15 / super.getParameters().latentHeatFusion * x;
+		if (y > meltingTemperature) {
+			if (x >= 0) {
+				return super.getParameters().thetaS[id];
 			} else {
-				return super.parameters.thetaR[id] + (super.parameters.thetaS[id]-super.parameters.thetaR[id])
-						*Math.pow( 1.0 + Math.pow(Math.abs(super.parameters.par2[id]*x), super.parameters.par1[id]), -m); 
+				return super.getParameters().thetaR[id]
+						+ (super.getParameters().thetaS[id] - super.getParameters().thetaR[id]) * Math.pow(1.0 + Math
+								.pow(Math.abs(super.getParameters().par2[id] * x), super.getParameters().par1[id]), -m);
 			}
 		} else {
-			psiT = x + super.parameters.latentHeatFusion/(9.81*meltingTemperature)*(y-meltingTemperature);
-			if(psiT>=0) {
-				return super.parameters.thetaS[id];
+			psiT = x + super.getParameters().latentHeatFusion / (9.81 * meltingTemperature) * (y - meltingTemperature);
+			if (psiT >= 0) {
+				return super.getParameters().thetaS[id];
 			} else {
-				return super.parameters.thetaR[id] + (super.parameters.thetaS[id]-super.parameters.thetaR[id])
-						*Math.pow( 1.0 + Math.pow(Math.abs(super.parameters.par2[id]*psiT), super.parameters.par1[id]), -m); 
+				return super.getParameters().thetaR[id]
+						+ (super.getParameters().thetaS[id] - super.getParameters().thetaR[id])
+								* Math.pow(1.0 + Math.pow(Math.abs(super.getParameters().par2[id] * psiT),
+										super.getParameters().par1[id]), -m);
 			}
 		}
-		
+
 	}
-
-
 
 	@Override
 	public double df(double x, double y, int id) {
-		
-		m = 1-1/super.parameters.par1[id];
-		meltingTemperature = 273.15 + 9.81*273.15/super.parameters.latentHeatFusion*x;
-		if(y>meltingTemperature) {
-			if(x>=0) {
+
+		m = 1 - 1 / super.getParameters().par1[id];
+		meltingTemperature = 273.15 + 9.81 * 273.15 / super.getParameters().latentHeatFusion * x;
+		if (y > meltingTemperature) {
+			if (x >= 0) {
 				return 0.0;
 			} else {
-				return 0.0; 
+				return 0.0;
 			}
 		} else {
-			psiT = x+super.parameters.latentHeatFusion/(9.81*meltingTemperature)*(y-meltingTemperature);
-			tmp = super.parameters.latentHeatFusion/(9.81*meltingTemperature);
-			if(psiT>=0) {
+			psiT = x + super.getParameters().latentHeatFusion / (9.81 * meltingTemperature) * (y - meltingTemperature);
+			tmp = super.getParameters().latentHeatFusion / (9.81 * meltingTemperature);
+			if (psiT >= 0) {
 				return 0.0;
 			} else {
 //				return (super.parameters.thetaS[id]-super.parameters.thetaR[id])*m*super.parameters.par1[id]*super.parameters.par2[id]*tmp
 //						*Math.pow( 1.0 + Math.pow(Math.abs(super.parameters.par2[id]*(x+tmp*(y-meltingTemperature))), super.parameters.par1[id]), -m-1)
 //						*Math.pow(Math.abs(super.parameters.par2[id]*(x+tmp*(y-meltingTemperature))), super.parameters.par1[id]-1); 
-				return (super.parameters.thetaS[id]-super.parameters.thetaR[id])*m*super.parameters.par1[id]*super.parameters.par2[id]*tmp
-						*Math.pow( 1.0 + Math.pow(Math.abs(super.parameters.par2[id]*psiT), super.parameters.par1[id]), -m-1)
-						*Math.pow(Math.abs(super.parameters.par2[id]*psiT), super.parameters.par1[id]-1); 
+				return (super.getParameters().thetaS[id] - super.getParameters().thetaR[id]) * m
+						* super.getParameters().par1[id] * super.getParameters().par2[id] * tmp
+						* Math.pow(1.0 + Math.pow(Math.abs(super.getParameters().par2[id] * psiT),
+								super.getParameters().par1[id]), -m - 1)
+						* Math.pow(Math.abs(super.getParameters().par2[id] * psiT), super.getParameters().par1[id] - 1);
 			}
 		}
-		
-	}
 
+	}
 
 	@Override
 	public double ddf(double x, double y, int id) {
-		
-		m = 1-1/super.parameters.par1[id];
-		meltingTemperature = 273.15 + 9.81*273.15/super.parameters.latentHeatFusion*x;
-		if(y>meltingTemperature) {
-			if(x>0) {
+
+		m = 1 - 1 / super.getParameters().par1[id];
+		meltingTemperature = 273.15 + 9.81 * 273.15 / super.getParameters().latentHeatFusion * x;
+		if (y > meltingTemperature) {
+			if (x > 0) {
 				return 0.0;
 			} else {
-				return 0.0; 
+				return 0.0;
 			}
 		} else {
-			psiT = x+super.parameters.latentHeatFusion/(9.81*meltingTemperature)*(y-meltingTemperature);
-			tmp = super.parameters.latentHeatFusion/(9.81*meltingTemperature);
-			if(psiT>=0) {
+			psiT = x + super.getParameters().latentHeatFusion / (9.81 * meltingTemperature) * (y - meltingTemperature);
+			tmp = super.getParameters().latentHeatFusion / (9.81 * meltingTemperature);
+			if (psiT >= 0) {
 				return 0.0;
 			} else {
 //				return (super.parameters.thetaS[id]-super.parameters.thetaR[id])*m*super.parameters.par1[id] * Math.pow( Math.abs(super.parameters.par2[id]*(x+tmp*(y-meltingTemperature))), super.parameters.par1[id] ) * Math.pow(1+Math.pow(Math.abs(super.parameters.par2[id]*(x+tmp*(y-meltingTemperature))),super.parameters.par1[id]), -m-2)*
 //						(  super.parameters.par1[id]*Math.pow(super.parameters.par2[id]*tmp,2)*(m+1) * Math.pow(Math.abs(super.parameters.par2[id]*(x+tmp*(y-meltingTemperature))),super.parameters.par1[id]-2) -
 //								(super.parameters.par1[id]-1)*Math.pow(super.parameters.par2[id]*tmp,2) * Math.pow(Math.abs(super.parameters.par2[id]*tmp*(y-meltingTemperature)),-2) * (1+Math.pow(Math.abs(super.parameters.par2[id]*(x+tmp*(y-meltingTemperature))),super.parameters.par1[id]))   ); 
-				return (super.parameters.thetaS[id]-super.parameters.thetaR[id])*m*super.parameters.par1[id] * Math.pow( Math.abs(super.parameters.par2[id]*psiT), super.parameters.par1[id] ) * Math.pow(1+Math.pow(Math.abs(super.parameters.par2[id]*psiT),super.parameters.par1[id]), -m-2) *
-						(  super.parameters.par1[id]*Math.pow(super.parameters.par2[id]*tmp,2)*(m+1) * Math.pow(Math.abs(super.parameters.par2[id]*psiT),super.parameters.par1[id]-2) -
-								(super.parameters.par1[id]-1)*Math.pow(super.parameters.par2[id]*tmp,2) * Math.pow(Math.abs(super.parameters.par2[id]*psiT),-2) * (1+Math.pow(Math.abs(super.parameters.par2[id]*psiT),super.parameters.par1[id]))   ); 
+				return (super.getParameters().thetaS[id] - super.getParameters().thetaR[id]) * m
+						* super.getParameters().par1[id]
+						* Math.pow(Math.abs(super.getParameters().par2[id] * psiT), super.getParameters().par1[id])
+						* Math.pow(1 + Math.pow(Math.abs(super.getParameters().par2[id] * psiT),
+								super.getParameters().par1[id]), -m - 2)
+						* (super.getParameters().par1[id] * Math.pow(super.getParameters().par2[id] * tmp, 2) * (m + 1)
+								* Math.pow(Math.abs(super.getParameters().par2[id] * psiT),
+										super.getParameters().par1[id] - 2)
+								- (super.getParameters().par1[id] - 1)
+										* Math.pow(super.getParameters().par2[id] * tmp, 2)
+										* Math.pow(Math.abs(super.getParameters().par2[id] * psiT), -2)
+										* (1 + Math.pow(Math.abs(super.getParameters().par2[id] * psiT),
+												super.getParameters().par1[id])));
 			}
 		}
-		
+
 	}
-
-
 
 	@Override
 	public double f(double x, int i) {
 
 		return -9999.0;
-		
+
 	}
-
-
 
 	@Override
 	public double df(double x, int i) {
 
 		return -9999.0;
-		
+
 	}
-
-
 
 	@Override
 	public double ddf(double x, int i) {
 
 		return 0;
-		
-	}
 
+	}
 
 }

@@ -27,25 +27,32 @@ package org.geoframe.closureequation.closureequation;
  *
  */
 public abstract class ClosureEquation {
-	
-	public Parameters parameters;
-	
-	public ClosureEquation() {
-		parameters = Parameters.getInstance();
+
+	private Parameters getParameters;
+
+	public ClosureEquation(Parameters parameters) {
+		this.getParameters = parameters;
 	}
-	
+
+	public Parameters getParameters() {
+		return getParameters;
+	}
+//	public Parameters parameters;
+//
+//	public ClosureEquation() {
+//		parameters = Parameters.getInstance();
+//	}
+
 	public abstract double f(double x, double y, int i);
 
-	public abstract double f(double x, int i);	
-	
-	
+	public abstract double f(double x, int i);
+
 	public abstract double df(double x, double y, int i);
-	
+
 	public abstract double df(double x, int i);
-	
-	
+
 	public abstract double ddf(double x, double y, int i);
-	
+
 	public abstract double ddf(double x, int i);
-	
+
 }

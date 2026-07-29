@@ -29,31 +29,31 @@ import org.geoframe.closureequation.conductivitymodel.ConductivityEquation;
  * @author Niccolo Tubini
  *
  */
-public class MualemBrooksCorey extends ConductivityEquation{
-	
+public class MualemBrooksCorey extends ConductivityEquation {
+
 	private double saturationDegree = -999.0;
-	
+
 	public MualemBrooksCorey(ClosureEquation closureEquation) {
 		super(closureEquation);
 	}
-	
-	
+
 	public double k(double x, double y, int id, int element) {
-			
-		saturationDegree = (super.closureEquation.f(x, y, id) - super.closureEquation.parameters.thetaR[id])/(super.closureEquation.parameters.thetaS[id] -super.closureEquation.parameters.thetaR[id]); 
-		if(saturationDegree<1) {
-			return super.closureEquation.parameters.kappaSaturation[id] * Math.pow(saturationDegree, 3+2/super.closureEquation.parameters.par1[id]);
+
+		saturationDegree = (super.closureEquation.f(x, y, id) - super.closureEquation.getParameters().thetaR[id])
+				/ (super.closureEquation.getParameters().thetaS[id] - super.closureEquation.getParameters().thetaR[id]);
+		if (saturationDegree < 1) {
+			return super.closureEquation.getParameters().kappaSaturation[id]
+					* Math.pow(saturationDegree, 3 + 2 / super.closureEquation.getParameters().par1[id]);
 		} else {
-			return super.closureEquation.parameters.kappaSaturation[id];
+			return super.closureEquation.getParameters().kappaSaturation[id];
 		}
-		
-	
+
 	}
-	
+
 	public double k(double x, int id, int element) {
-		
+
 		return -9999.0;
-	
+
 	}
-	
+
 }

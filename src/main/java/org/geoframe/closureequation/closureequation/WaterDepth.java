@@ -33,6 +33,13 @@ package org.geoframe.closureequation.closureequation;
 public class WaterDepth extends ClosureEquation {
 
 
+	public WaterDepth(Parameters parameters) {
+		super(parameters);
+		// TODO Auto-generated constructor stub
+	}
+
+
+
 	@Override
 	public double f(double x, double y, int id) {
 

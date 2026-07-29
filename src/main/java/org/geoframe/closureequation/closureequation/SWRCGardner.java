@@ -33,16 +33,23 @@ package org.geoframe.closureequation.closureequation;
 public class SWRCGardner extends SoilWaterRetentionCurve {
 
 
+	public SWRCGardner(Parameters parameters) {
+		super(parameters);
+		// TODO Auto-generated constructor stub
+	}
+
+
+
 	@Override
 	public double f(double x, double y, int id) {
 
 		if(x>=0.0) {
-			return super.parameters.thetaS[id] +
-					1000*9.81*(super.parameters.alphaSpecificStorage[id] + super.parameters.thetaS[id]*super.parameters.betaSpecificStorage[id])*x;
+			return super.getParameters().thetaS[id] +
+					1000*9.81*(super.getParameters().alphaSpecificStorage[id] + super.getParameters().thetaS[id]*super.getParameters().betaSpecificStorage[id])*x;
 		} else {
 			
-			return super.parameters.thetaR[id] + (super.parameters.thetaS[id]-super.parameters.thetaR[id])
-					*Math.exp(super.parameters.par1[id]*x);
+			return super.getParameters().thetaR[id] + (super.getParameters().thetaS[id]-super.getParameters().thetaR[id])
+					*Math.exp(super.getParameters().par1[id]*x);
 		}
 	}
 
@@ -52,10 +59,10 @@ public class SWRCGardner extends SoilWaterRetentionCurve {
 	public double df(double x, double y, int id) {
 
 		if(x>=0.0) {
-			return 1000*9.81*( super.parameters.alphaSpecificStorage[id] + super.parameters.thetaS[id]*super.parameters.betaSpecificStorage[id] );
+			return 1000*9.81*( super.getParameters().alphaSpecificStorage[id] + super.getParameters().thetaS[id]*super.getParameters().betaSpecificStorage[id] );
 		} else {
-			return (super.parameters.thetaS[id]-super.parameters.thetaR[id])
-					*Math.exp(super.parameters.par1[id]*x)*super.parameters.par1[id];		
+			return (super.getParameters().thetaS[id]-super.getParameters().thetaR[id])
+					*Math.exp(super.getParameters().par1[id]*x)*super.getParameters().par1[id];		
 		}
 	}
 

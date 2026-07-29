@@ -25,29 +25,31 @@ package org.geoframe.closureequation.closureequation;
  */
 
 public class SoilWaterRetentionCurveFactory {
-	
-	
-	public ClosureEquation create(String model) {
-		
+
+	public ClosureEquation create(String model, Parameters parameters) {
+
 		ClosureEquation myModel = null;
-		
-		if(model.equalsIgnoreCase("Van Genuchten") || model.equalsIgnoreCase("VanGenuchten") || model.equalsIgnoreCase("VG")) {
-			myModel = new SWRCVanGenuchten();
-		}else if(model.equalsIgnoreCase("Brooks Corey") || model.equalsIgnoreCase("BrooksCorey") || model.equalsIgnoreCase("BC")) {
-			myModel = new SWRCBrooksCorey();
-		}else if(model.equalsIgnoreCase("Kosugi")) {
-			myModel = new SWRCKosugi();
-		}else if(model.equalsIgnoreCase("Romano")) {
-			myModel = new SWRCRomano();
-		}else if(model.equalsIgnoreCase("Gardner")) {
-			myModel = new SWRCGardner();
-		}else if(model.equalsIgnoreCase("Water Depth") || model.equalsIgnoreCase("WaterDepth")) {
-			myModel = new WaterDepth();
-		}else if(model.equalsIgnoreCase("Van Genuchten Dall Amico") || model.equalsIgnoreCase("VanGenuchtenDallAmico")) {
-			myModel = new SWRCVanGenuchtenDallAmico();
-		}else if(model.equalsIgnoreCase("None") || model.equalsIgnoreCase("")) {
-			myModel = new NoneClosureEquation();
-		}else {
+
+		if (model.equalsIgnoreCase("Van Genuchten") || model.equalsIgnoreCase("VanGenuchten")
+				|| model.equalsIgnoreCase("VG")) {
+			myModel = new SWRCVanGenuchten(parameters);
+		} else if (model.equalsIgnoreCase("Brooks Corey") || model.equalsIgnoreCase("BrooksCorey")
+				|| model.equalsIgnoreCase("BC")) {
+			myModel = new SWRCBrooksCorey(parameters);
+		} else if (model.equalsIgnoreCase("Kosugi")) {
+			myModel = new SWRCKosugi(parameters);
+		} else if (model.equalsIgnoreCase("Romano")) {
+			myModel = new SWRCRomano(parameters);
+		} else if (model.equalsIgnoreCase("Gardner")) {
+			myModel = new SWRCGardner(parameters);
+		} else if (model.equalsIgnoreCase("Water Depth") || model.equalsIgnoreCase("WaterDepth")) {
+			myModel = new WaterDepth(parameters);
+		} else if (model.equalsIgnoreCase("Van Genuchten Dall Amico")
+				|| model.equalsIgnoreCase("VanGenuchtenDallAmico")) {
+			myModel = new SWRCVanGenuchtenDallAmico(parameters);
+		} else if (model.equalsIgnoreCase("None") || model.equalsIgnoreCase("")) {
+			myModel = new NoneClosureEquation(parameters);
+		} else {
 			System.out.println("\n\n\tERROR: please check swrcModel name.");
 		}
 

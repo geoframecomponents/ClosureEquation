@@ -32,16 +32,23 @@ package org.geoframe.closureequation.closureequation;
 public class SWRCBrooksCorey extends SoilWaterRetentionCurve {
 
 
+	public SWRCBrooksCorey(Parameters parameters) {
+		super(parameters);
+		// TODO Auto-generated constructor stub
+	}
+
+
+
 	@Override
 	public double f(double x, double y, int id) {
 
 		if(x>=0.0) {
-			return super.parameters.thetaS[id] +
-					1000*9.81*(super.parameters.alphaSpecificStorage[id] + super.parameters.thetaS[id]*super.parameters.betaSpecificStorage[id])*x;
-		} else if(x<=super.parameters.par2[id]) {
-			return super.parameters.thetaR[id] + (super.parameters.thetaS[id]-super.parameters.thetaR[id]) * Math.pow((super.parameters.par2[id]/x), super.parameters.par1[id]);
+			return super.getParameters().thetaS[id] +
+					1000*9.81*(super.getParameters().alphaSpecificStorage[id] + super.getParameters().thetaS[id]*super.getParameters().betaSpecificStorage[id])*x;
+		} else if(x<=super.getParameters().par2[id]) {
+			return super.getParameters().thetaR[id] + (super.getParameters().thetaS[id]-super.getParameters().thetaR[id]) * Math.pow((super.getParameters().par2[id]/x), super.getParameters().par1[id]);
 		} else {		
-			return super.parameters.thetaS[id]; 
+			return super.getParameters().thetaS[id]; 
 		}
 	}
 
@@ -51,9 +58,9 @@ public class SWRCBrooksCorey extends SoilWaterRetentionCurve {
 	public double df(double x, double y, int id) {
 
 		if(x>=0.0) {
-			return 1000*9.81*( super.parameters.alphaSpecificStorage[id] + super.parameters.thetaS[id]*super.parameters.betaSpecificStorage[id] );
-		} else if(x<=super.parameters.par2[id]) {
-			return super.parameters.par1[id]*(super.parameters.thetaS[id] - super.parameters.thetaR[id])/Math.abs(super.parameters.par2[id]) * Math.pow(super.parameters.par2[id]/x,super.parameters.par1[id]+1);
+			return 1000*9.81*( super.getParameters().alphaSpecificStorage[id] + super.getParameters().thetaS[id]*super.getParameters().betaSpecificStorage[id] );
+		} else if(x<=super.getParameters().par2[id]) {
+			return super.getParameters().par1[id]*(super.getParameters().thetaS[id] - super.getParameters().thetaR[id])/Math.abs(super.getParameters().par2[id]) * Math.pow(super.getParameters().par2[id]/x,super.getParameters().par1[id]+1);
 		} else {
 			return 0.0;
 		}

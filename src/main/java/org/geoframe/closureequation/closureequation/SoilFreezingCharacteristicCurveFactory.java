@@ -25,21 +25,20 @@ package org.geoframe.closureequation.closureequation;
  */
 
 public class SoilFreezingCharacteristicCurveFactory {
-	
-	
-	public SoilFreezingCharacteristicCurve create(String model) {
-		
+
+	public SoilFreezingCharacteristicCurve create(String model, Parameters parameters) {
+
 		SoilFreezingCharacteristicCurve myModel = null;
-		
-		if(model.equalsIgnoreCase("DallAmico")) {
-			myModel = new DallAmicoSFCC();
-		}else if(model.equalsIgnoreCase("Lunardini")) {
-			myModel = new LunardiniSFCC();
-		}else if(model.equalsIgnoreCase("McKenzieLinear")) {
-			myModel = new McKenzieLinearSFCC();
-		}else if(model.equalsIgnoreCase("None")) {
-			myModel = new NoneSFCC();
-		}else {
+
+		if (model.equalsIgnoreCase("DallAmico")) {
+			myModel = new DallAmicoSFCC(parameters);
+		} else if (model.equalsIgnoreCase("Lunardini")) {
+			myModel = new LunardiniSFCC(parameters);
+		} else if (model.equalsIgnoreCase("McKenzieLinear")) {
+			myModel = new McKenzieLinearSFCC(parameters);
+		} else if (model.equalsIgnoreCase("None")) {
+			myModel = new NoneSFCC(parameters);
+		} else {
 			System.out.println("\tERROR: please check sfccModel name.");
 		}
 		return myModel;

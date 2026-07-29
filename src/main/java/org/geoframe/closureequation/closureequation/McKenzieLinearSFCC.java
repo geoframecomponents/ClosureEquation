@@ -38,16 +38,23 @@ public class McKenzieLinearSFCC extends SoilFreezingCharacteristicCurve {
 	 * T_res = super.parameters.meltingTemperature[id]
 	 */
 	
+	public McKenzieLinearSFCC(Parameters parameters) {
+		super(parameters);
+		// TODO Auto-generated constructor stub
+	}
+
+
+
 	@Override
 	public double f(double x, int id) {
 		
 		
 		if(x>=273.15) {
-			return super.parameters.thetaS[id];
-		} else if (x<super.parameters.meltingTemperature[id]){
-			return super.parameters.thetaR[id]; 
+			return super.getParameters().thetaS[id];
+		} else if (x<super.getParameters().meltingTemperature[id]){
+			return super.getParameters().thetaR[id]; 
 		} else {
-			return super.parameters.thetaR[id] + (super.parameters.thetaS[id]-super.parameters.thetaR[id])/(273.15-super.parameters.meltingTemperature[id]) * (x-super.parameters.meltingTemperature[id]);
+			return super.getParameters().thetaR[id] + (super.getParameters().thetaS[id]-super.getParameters().thetaR[id])/(273.15-super.getParameters().meltingTemperature[id]) * (x-super.getParameters().meltingTemperature[id]);
 		}
 	}
 	
@@ -58,10 +65,10 @@ public class McKenzieLinearSFCC extends SoilFreezingCharacteristicCurve {
 		
 		if(x>=273.15) {
 			return 0.0;
-		} else if(x<super.parameters.meltingTemperature[id]) {
+		} else if(x<super.getParameters().meltingTemperature[id]) {
 			return 0.0;
 		} else {
-			return (super.parameters.thetaS[id]-super.parameters.thetaR[id])/(273.15-super.parameters.meltingTemperature[id]);
+			return (super.getParameters().thetaS[id]-super.getParameters().thetaR[id])/(273.15-super.getParameters().meltingTemperature[id]);
 		}
 	}
 	

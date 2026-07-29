@@ -29,8 +29,8 @@ import org.geoframe.closureequation.conductivitymodel.ConductivityEquation;
  * @author Niccolo Tubini
  *
  */
-public class Johansen extends ConductivityEquation{
-	
+public class Johansen extends ConductivityEquation {
+
 	public Johansen(ClosureEquation rheology) {
 		super(rheology);
 		// TODO Auto-generated constructor stub
@@ -40,22 +40,25 @@ public class Johansen extends ConductivityEquation{
 	private double kerstenNumber;
 	private double lambdaSat;
 	private double lambdaDry;
-	
-	
-	public double k(double x, int id, int element) {
-		
-		iceRatio = (super.closureEquation.parameters.thetaS[id] - closureEquation.f(x, id))/super.closureEquation.parameters.thetaS[id];
-		kerstenNumber = 1.0; // soil is assumed to be always saturated
-		
-		return Math.pow(super.closureEquation.parameters.thermalConductivitySoilParticles[id], 1-super.closureEquation.parameters.thetaS[id]) * Math.pow(super.closureEquation.parameters.thermalConductivityWater, (1-iceRatio)*super.closureEquation.parameters.thetaS[id]) * Math.pow(super.closureEquation.parameters.thermalConductivityIce, iceRatio*super.closureEquation.parameters.thetaS[id]);
-	}
 
+	public double k(double x, int id, int element) {
+
+		iceRatio = (super.closureEquation.getParameters().thetaS[id] - closureEquation.f(x, id))
+				/ super.closureEquation.getParameters().thetaS[id];
+		kerstenNumber = 1.0; // soil is assumed to be always saturated
+
+		return Math.pow(super.closureEquation.getParameters().thermalConductivitySoilParticles[id],
+				1 - super.closureEquation.getParameters().thetaS[id])
+				* Math.pow(super.closureEquation.getParameters().thermalConductivityWater,
+						(1 - iceRatio) * super.closureEquation.getParameters().thetaS[id])
+				* Math.pow(super.closureEquation.getParameters().thermalConductivityIce,
+						iceRatio * super.closureEquation.getParameters().thetaS[id]);
+	}
 
 	@Override
 	public double k(double x, double y, int id, int element) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
-	
-	
+
 }

@@ -32,20 +32,27 @@ package org.geoframe.closureequation.closureequation;
  */
 public class SWRCVanGenuchten extends SoilWaterRetentionCurve {
 
+	public SWRCVanGenuchten(Parameters parameters) {
+		super(parameters);
+		// TODO Auto-generated constructor stub
+	}
+
+
+
 	private double m;
 
 	@Override
 	public double f(double x, double y, int id) {
 
-		m = 1-1/super.parameters.par1[id];
+		m = 1-1/super.getParameters().par1[id];
 
 		if(x>=0.0) {
-			return super.parameters.thetaS[id] +
-					1000*9.81*(super.parameters.alphaSpecificStorage[id] + super.parameters.thetaS[id]*super.parameters.betaSpecificStorage[id])*x;
+			return super.getParameters().thetaS[id] +
+					1000*9.81*(super.getParameters().alphaSpecificStorage[id] + super.getParameters().thetaS[id]*super.getParameters().betaSpecificStorage[id])*x;
 		} else {
 			
-			return super.parameters.thetaR[id] + (super.parameters.thetaS[id]-super.parameters.thetaR[id])
-					*Math.pow( 1.0 + Math.pow(Math.abs(super.parameters.par2[id]*x), super.parameters.par1[id]), -m); 
+			return super.getParameters().thetaR[id] + (super.getParameters().thetaS[id]-super.getParameters().thetaR[id])
+					*Math.pow( 1.0 + Math.pow(Math.abs(super.getParameters().par2[id]*x), super.getParameters().par1[id]), -m); 
 		}
 	}
 
@@ -53,12 +60,12 @@ public class SWRCVanGenuchten extends SoilWaterRetentionCurve {
 
 	@Override
 	public double df(double x, double y, int id) {
-		m = 1-1/super.parameters.par1[id];
+		m = 1-1/super.getParameters().par1[id];
 
 		if(x>=0.0) {
-			return 1000*9.81*( super.parameters.alphaSpecificStorage[id] + super.parameters.thetaS[id]*super.parameters.betaSpecificStorage[id] );
+			return 1000*9.81*( super.getParameters().alphaSpecificStorage[id] + super.getParameters().thetaS[id]*super.getParameters().betaSpecificStorage[id] );
 		} else {
-			return super.parameters.par2[id]*super.parameters.par1[id]*this.m*(super.parameters.thetaS[id] - super.parameters.thetaR[id]) / Math.pow(1.0 + Math.pow(Math.abs(super.parameters.par2[id]*x), super.parameters.par1[id]), this.m + 1.0)*Math.pow(Math.abs(super.parameters.par2[id]*x), super.parameters.par1[id] - 1.0);
+			return super.getParameters().par2[id]*super.getParameters().par1[id]*this.m*(super.getParameters().thetaS[id] - super.getParameters().thetaR[id]) / Math.pow(1.0 + Math.pow(Math.abs(super.getParameters().par2[id]*x), super.getParameters().par1[id]), this.m + 1.0)*Math.pow(Math.abs(super.getParameters().par2[id]*x), super.getParameters().par1[id] - 1.0);
 		}
 	}
 

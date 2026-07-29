@@ -29,32 +29,32 @@ import org.geoframe.closureequation.conductivitymodel.ConductivityEquation;
  * @author Niccolo Tubini
  *
  */
-public class Gardner extends ConductivityEquation{
-	
+public class Gardner extends ConductivityEquation {
+
 	private double saturationDegree = -999.0;
-	
+
 	public Gardner(ClosureEquation closureEquation) {
 		super(closureEquation);
 		// TODO Auto-generated constructor stub
 	}
-	
-	
+
 	public double k(double x, double y, int id, int element) {
-			
-		saturationDegree = (super.closureEquation.f(x, y, id) - super.closureEquation.parameters.thetaR[id])/(super.closureEquation.parameters.thetaS[id] - super.closureEquation.parameters.thetaR[id]); 
-		if(saturationDegree<1) {
-			return super.closureEquation.parameters.kappaSaturation[id] * Math.exp(super.closureEquation.parameters.par1[id]*x);
+
+		saturationDegree = (super.closureEquation.f(x, y, id) - super.closureEquation.getParameters().thetaR[id])
+				/ (super.closureEquation.getParameters().thetaS[id] - super.closureEquation.getParameters().thetaR[id]);
+		if (saturationDegree < 1) {
+			return super.closureEquation.getParameters().kappaSaturation[id]
+					* Math.exp(super.closureEquation.getParameters().par1[id] * x);
 		} else {
-			return super.closureEquation.parameters.kappaSaturation[id];
+			return super.closureEquation.getParameters().kappaSaturation[id];
 		}
-		
-	
+
 	}
-	
+
 	public double k(double x, int id, int element) {
-		
+
 		return -9999.0;
-	
+
 	}
-	
+
 }

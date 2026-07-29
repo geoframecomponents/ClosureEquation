@@ -30,6 +30,13 @@ package org.geoframe.closureequation.closureequation;
 public class NoneClosureEquation extends SoilFreezingCharacteristicCurve {
 	
 	
+	public NoneClosureEquation(Parameters parameters) {
+		super(parameters);
+		// TODO Auto-generated constructor stub
+	}
+
+
+
 	@Override
 	public double f(double x, int id) {
 		

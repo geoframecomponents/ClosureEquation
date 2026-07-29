@@ -34,17 +34,24 @@ import org.apache.commons.math3.special.Erf;
 public class SWRCKosugi extends SoilWaterRetentionCurve {
 
 
+	public SWRCKosugi(Parameters parameters) {
+		super(parameters);
+		// TODO Auto-generated constructor stub
+	}
+
+
+
 	@Override
 	public double f(double x, double y, int id) {
 
 
 		if(x>=0.0) {
-			return super.parameters.thetaS[id] +
-					1000*9.81*(super.parameters.alphaSpecificStorage[id] + super.parameters.thetaS[id]*super.parameters.betaSpecificStorage[id])*x;
+			return super.getParameters().thetaS[id] +
+					1000*9.81*(super.getParameters().alphaSpecificStorage[id] + super.getParameters().thetaS[id]*super.getParameters().betaSpecificStorage[id])*x;
 		} else {
 			
-			return super.parameters.thetaR[id] + (super.parameters.thetaS[id]-super.parameters.thetaR[id])
-					*0.5*Erf.erfc( Math.log(x/super.parameters.par1[id])/(super.parameters.par2[id]*Math.pow(2,0.5)) ); 
+			return super.getParameters().thetaR[id] + (super.getParameters().thetaS[id]-super.getParameters().thetaR[id])
+					*0.5*Erf.erfc( Math.log(x/super.getParameters().par1[id])/(super.getParameters().par2[id]*Math.pow(2,0.5)) ); 
 		}
 	}
 
@@ -54,9 +61,9 @@ public class SWRCKosugi extends SoilWaterRetentionCurve {
 	public double df(double x, double y, int id) {
 
 		if(x>=0.0) {
-			return 1000*9.81*( super.parameters.alphaSpecificStorage[id] + super.parameters.thetaS[id]*super.parameters.betaSpecificStorage[id] );
+			return 1000*9.81*( super.getParameters().alphaSpecificStorage[id] + super.getParameters().thetaS[id]*super.getParameters().betaSpecificStorage[id] );
 		} else {
-			return (super.parameters.thetaS[id]-super.parameters.thetaR[id])/(Math.sqrt(2*Math.PI)*super.parameters.par2[id]*(-x)) * Math.exp(-Math.pow( Math.log(x/super.parameters.par1[id]),2)/(2*Math.pow(super.parameters.par2[id],2)));
+			return (super.getParameters().thetaS[id]-super.getParameters().thetaR[id])/(Math.sqrt(2*Math.PI)*super.getParameters().par2[id]*(-x)) * Math.exp(-Math.pow( Math.log(x/super.getParameters().par1[id]),2)/(2*Math.pow(super.getParameters().par2[id],2)));
 		}
 	}
 

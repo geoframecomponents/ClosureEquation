@@ -29,4 +29,9 @@ package org.geoframe.closureequation.closureequation;
  */
 public abstract class SoilWaterRetentionCurve extends ClosureEquation{
 
+	public SoilWaterRetentionCurve(Parameters parameters) {
+		super(parameters);
+		// TODO Auto-generated constructor stub
+	}
+
 }

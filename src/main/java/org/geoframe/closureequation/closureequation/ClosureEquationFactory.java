@@ -20,12 +20,11 @@
 package org.geoframe.closureequation.closureequation;
 
 public class ClosureEquationFactory {
-	
-	
+
 	public ClosureEquation create(String model) {
-		
+
 		ClosureEquation myModel = null;
-		
+
 		return myModel;
 	}
 

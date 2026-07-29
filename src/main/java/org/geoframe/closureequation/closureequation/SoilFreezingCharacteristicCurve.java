@@ -17,7 +17,6 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-
 /**
  * 
  */
@@ -27,8 +26,11 @@ package org.geoframe.closureequation.closureequation;
  * @author Niccolo Tubini
  *
  */
-public abstract class SoilFreezingCharacteristicCurve extends ClosureEquation{
-	
+public abstract class SoilFreezingCharacteristicCurve extends ClosureEquation {
 
+	public SoilFreezingCharacteristicCurve(Parameters parameters) {
+		super(parameters);
+		// TODO Auto-generated constructor stub
+	}
 
 }

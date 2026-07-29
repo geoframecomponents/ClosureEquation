@@ -17,7 +17,6 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-
 /**
  * 
  */
@@ -28,44 +27,45 @@ package org.geoframe.closureequation.closureequation;
  *
  */
 public class LunardiniSFCC extends SoilFreezingCharacteristicCurve {
-	
+
+	public LunardiniSFCC(Parameters parameters) {
+		super(parameters);
+		// TODO Auto-generated constructor stub
+	}
+
 	private double porosity = 0.336;
 	private double waterResidualSaturation = 0.391;
-	
+
 	@Override
 	public double f(double x, int id) {
-		
-		if(x>=273.15) {
+
+		if (x >= 273.15) {
 			return porosity;
-		} else if (x<super.parameters.meltingTemperature[id]) {
-			return porosity*waterResidualSaturation;
+		} else if (x < super.getParameters().meltingTemperature[id]) {
+			return porosity * waterResidualSaturation;
 		} else {
-			return porosity*( waterResidualSaturation + 
-					(1-waterResidualSaturation)/(273.15-super.parameters.meltingTemperature[id])*(x-super.parameters.meltingTemperature[id]) );
+			return porosity * (waterResidualSaturation
+					+ (1 - waterResidualSaturation) / (273.15 - super.getParameters().meltingTemperature[id])
+							* (x - super.getParameters().meltingTemperature[id]));
 		}
 	}
-	
-	
-	
+
 	@Override
 	public double df(double x, int id) {
-				
-		if(x>=273.15) {
+
+		if (x >= 273.15) {
 			return 0.0;
-		} else if (x<super.parameters.meltingTemperature[id]) {
+		} else if (x < super.getParameters().meltingTemperature[id]) {
 			return 0.0;
 		} else {
-			return porosity*(1-waterResidualSaturation)/(273.15-super.parameters.meltingTemperature[id]);
+			return porosity * (1 - waterResidualSaturation) / (273.15 - super.getParameters().meltingTemperature[id]);
 		}
 	}
-	
 
 	@Override
 	public double ddf(double x, int id) {
 		return 0.0;
 	}
-
-
 
 	@Override
 	public double f(double x, double y, int i) {
@@ -73,21 +73,16 @@ public class LunardiniSFCC extends SoilFreezingCharacteristicCurve {
 		return 0;
 	}
 
-
-
 	@Override
 	public double df(double x, double y, int i) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
-
-
 	@Override
 	public double ddf(double x, double y, int i) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
-	
-	
+
 }

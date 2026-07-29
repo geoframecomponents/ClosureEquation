@@ -39,9 +39,9 @@ public class WaterThermalConductivity extends ConductivityEquation{
 	
 	public double k(double x, int id, int element) {
 		if(x>=273.15) {
-			return super.closureEquation.parameters.thermalConductivityWater;
+			return super.closureEquation.getParameters().thermalConductivityWater;
 		} else {
-			return super.closureEquation.parameters.thermalConductivityIce;
+			return super.closureEquation.getParameters().thermalConductivityIce;
 		}
 	}
 
@@ -50,9 +50,9 @@ public class WaterThermalConductivity extends ConductivityEquation{
 	public double k(double x, double y, int id, int element) {
 		// TODO Auto-generated method stub
 		if(x>=273.15) {
-			return super.closureEquation.parameters.thermalConductivityWater;
+			return super.closureEquation.getParameters().thermalConductivityWater;
 		} else {
-			return super.closureEquation.parameters.thermalConductivityIce;
+			return super.closureEquation.getParameters().thermalConductivityIce;
 		}
 
 	}
